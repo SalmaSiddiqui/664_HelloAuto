@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>City List</h1>
+  {% if city_list %}
+  <ul>
+    {% for city in city_list %}
+      <li>
+          {{ city.nickname }} ({{ city.make }})
+          (<a href="{% url 'city_update' city.id %}">Update</a> |
+          <a href="{% url 'city_delete' city.id %}">Delete</a>) <br/>
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no cities in the library.</p>
+  {% endif %}
+  <p>
+    {% if state_count > 0 %}
+      <a href="{% url 'city_create' %}">Add a city</a>
+    {% else %}
+      Please add a state before you add an city.
+    {% endif %}
+  </p>
+  <p>
+  <a href="{% url 'state_list' %}">View states</a> ({{ state_count }}) |
+    <a href="{% url 'state_create' %}">Add a state</a>
+  </p>
+{% endblock %}

@@ -47,6 +47,8 @@ urlpatterns = [
     path('', include('home.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('citys/', include('citys.urls'))
     # path('autos/', include('autos.urls')),
-     path('cats/', include('cats.urls')),
+     # path('cats/', include('cats.urls')),
+
 ]
