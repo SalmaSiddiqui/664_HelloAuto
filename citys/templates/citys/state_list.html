@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>State List</h1>
+  {% if state_list %}
+  <ul>
+    {% for state in state_list %}
+      <li>
+          {{ state.name }}
+         (<a href="{% url 'state_update' state.id %}">Update</a> |
+          <a href="{% url 'state_delete' state.id %}">Delete</a>)
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no states in the library.</p>
+  {% endif %}
+  <p><a href="{% url 'state_create' %}">Add a state</a></p>
+  <p>
+    <a href="{% url 'citys' %}">Back to citys</a>
+  </p>
+{% endblock %}
