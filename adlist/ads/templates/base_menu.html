@@ -1,0 +1,35 @@
+{% extends 'base_bootstrap.html' %}
+{% load app_tags %} <!-- see home/templatetags/app_tags.py -->
+{% block navbar %}
+<nav class="navbar navbar-default navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="{% url 'ads' %}">{{ settings.APP_NAME }}</a>
+    </div>
+
+
+    <ul class="nav navbar-nav">
+      {% url 'ads' as ads %}
+      <li {% if request.get_full_path == ads %}class="active"{% endif %}>
+          <a href="{% url 'ads' %}">Ads</a></li>
+    </ul>
+
+
+    <ul class="nav navbar-nav navbar-right">
+      {% if user.is_authenticated %}
+      {% url 'ads' as ads %}
+      <li class="dropdown">
+      <!-- gravatar depends on app_tags being loaded -->
+      <!-- https://brobin.me/blog/2016/07/super-simple-django-gravatar/ -->
+      <a href="#" data-toggle="dropdown" class="dropdown-toggle"><img style="width: 25px;" src="{{ user|gravatar:60 }}"/><b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li><a href="{% url 'logout' %}?next={{ ads }}">Logout</a></li>
+        </ul>
+       </li>
+       {% else %}
+       <li><a href="{% url 'login' %}?next={{ ads }}">Login</a></li>
+       {% endif %}
+    </ul>
+  </div>
+</nav>
+{% endblock %}
